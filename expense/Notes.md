@@ -20,3 +20,15 @@ INSERT 0 1
 
 # 3.
 ALTER TABLE expenses ADD CONSTRAINT positive_amount CHECK (amount >= 0.01);
+
+# Listing Expenses
+
+Insert data into table:
+INSERT INTO expenses (amount, memo, created_on) VALUES (14.56, 'Pencils', NOW());
+INSERT INTO expenses (amount, memo, created_on) VALUES (3.29, 'Coffee', NOW());
+INSERT INTO expenses (amount, memo, created_on) VALUES (49.99, 'Text Editor', NOW());
+
+# Displaying Help
+
+# 1.
+We're created a HEREDOC block, which is a way to create a multine String in Ruby. `<<~` syntax strips leading whitespace from the beginning of each line of the string to allow for natural indenting in the code.
