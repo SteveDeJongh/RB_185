@@ -1,11 +1,12 @@
 #! /usr/bin/env ruby
 
 require 'pg'
+require 'Date'
+
+CONNECTION = PG.connect(dbname:"expenses")
 
 def list_espenses
-  dbconnection = PG.connect(dbname:"expenses")
-
-  results = dbconnection.exec("SELECT * FROM expenses;")
+  results = CONNECTION.exec("SELECT * FROM expenses;")
   results.each do |tuple|
     columns = [ tuple["id"].rjust(3),
                 tuple["created_on"].rjust(10),
@@ -14,6 +15,12 @@ def list_espenses
 
     puts columns.join(" | ")
   end
+end
+
+def add_expense(amount, memo)
+  date = Date.today
+  sql = ("INSERT INTO expenses (amount, memo, created_on) VALUES (#{amount}, '#{memo}', '#{date}');")
+  CONNECTION.exec(sql)
 end
 
 def display_help 
@@ -32,7 +39,12 @@ end
 
 command = ARGV.first
 if command == "list"
-  list_espenses
+  list_espenses  
+elsif command == "add"
+  amount = ARGV[1]
+  memo = ARGV[2]
+  abort "You must provide an amount and memo." unless amount && memo
+  add_expense(amount, memo)
 else
   display_help
 end

@@ -32,3 +32,7 @@ INSERT INTO expenses (amount, memo, created_on) VALUES (49.99, 'Text Editor', NO
 
 # 1.
 We're created a HEREDOC block, which is a way to create a multine String in Ruby. `<<~` syntax strips leading whitespace from the beginning of each line of the string to allow for natural indenting in the code.
+
+# Adding Expenses
+
+Because our solution only uses string interpolation to create our sql statement, this can allow values that would alter the meaning of our statement, `'` for example in passed in memo. We'll need to parse user inputs and insure we don't accidently alter any of our sql statements.
