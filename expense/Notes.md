@@ -75,3 +75,6 @@ $ ./expense list
 $
 
 # Code Structure
+
+
+# Searching expenses
